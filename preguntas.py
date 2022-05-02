@@ -89,7 +89,7 @@ def pregunta_03():
     stemmer = PorterStemmer()
 
     # Cree una instancia del analizador de palabras (build_analyzer)
-    analyzer = CountVectorizer().built_analyzer()
+    analyzer = vectorizer().built_analyzer()
 
     # Retorne el analizador de palabras
     return lambda x: (stemmer.stem(w) for w in analyzer(x))
@@ -186,12 +186,12 @@ def pregunta_05():
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
     cfm_train = confusion_matrix(
         y_true=y_train,
-        y_pred= gridSearchCV.predict(X_train),
+        y_pred= gridSearchCV.predict_proba(X_train),
     )
 
     cfm_test = confusion_matrix(
         y_true=y_test,
-        y_pred=gridSearchCV.predict(X_test),
+        y_pred=gridSearchCV.predict_proba(X_test),
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
