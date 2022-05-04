@@ -44,7 +44,7 @@ def pregunta_01():
 
     x_untagged = df_untagged["message"]
     y_untagged = df_untagged["label"]
-    #print(y_untagged.shape)
+    #print(x_untagged.shape)
 
     # Retorne los grupos de mensajes
     return x_tagged, y_tagged, x_untagged, y_untagged
@@ -89,12 +89,13 @@ def pregunta_03():
     stemmer = PorterStemmer()
 
     # Cree una instancia del analizador de palabras (build_analyzer)
-    analyzer = CountVectorizer.built_analyzer()
+    #analyzer = CountVectorizer.built_analyzer()
+    analyzer = CountVectorizer()
 
     # Retorne el analizador de palabras
     return lambda x: (stemmer.stem(w) for w in analyzer(x))
 
-
+    
 def pregunta_04():
     """
     Especificación del pipeline y entrenamiento
