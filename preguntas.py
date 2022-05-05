@@ -90,7 +90,7 @@ def pregunta_03():
 
     # Cree una instancia del analizador de palabras (build_analyzer)
     #analyzer = CountVectorizer.built_analyzer()
-    analyzer = CountVectorizer()
+    analyzer = CountVectorizer().built_analyzer()
 
     # Retorne el analizador de palabras
     return lambda x: (stemmer.stem(w) for w in analyzer(x))
@@ -146,7 +146,7 @@ def pregunta_04():
     # considerar 10 valores entre 0.1 y 1.0 para el parámetro alpha de
     # BernoulliNB.
     param_grid = {
-        "Bernoulli": np.random(0.1, 1.0, 10),
+        "Bernoulli__alpha": np.linspace(0.1, 1.0, 10),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
