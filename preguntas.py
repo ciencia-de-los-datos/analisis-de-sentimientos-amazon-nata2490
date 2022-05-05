@@ -145,7 +145,7 @@ def pregunta_04():
     # considerar 10 valores entre 0.1 y 1.0 para el parámetro alpha de
     # BernoulliNB.
     param_grid = {
-        "Bernoulli__alpha": np.linspace(0.1, 1.0, 10),
+        "Bernoulli__alpha": np.arange(0.1, 1.0, 10),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
@@ -160,17 +160,20 @@ def pregunta_04():
         refit=True,
         return_train_score=False,
     )
+    gridSearchCV.fit(x_train, y_train)
+    gridSearchCV.fit(x_test, y_test)
 
     # Búsque la mejor combinación de regresores
-    gridSearchCV.fit(x_train, y_train)
-    gridSearchCV.best_estimator_
+    
+    #gridSearchCV.best_estimator_
     #gridSearchCV.best_params_
     
-    a=gridSearchCV.score(x_train, y_train).round(4)
-    b=gridSearchCV.score(x_test, y_test).round(4)
+    #a=gridSearchCV.score(x_train, y_train).round(4)
+    #b=gridSearchCV.score(x_test, y_test).round(4)
+    #print(gridSearchCV)
+    #Retorne el mejor modelo
+    return gridSearchCV
 
-    # Retorne el mejor modelo
-    return a, b
 
 
 def pregunta_05():
