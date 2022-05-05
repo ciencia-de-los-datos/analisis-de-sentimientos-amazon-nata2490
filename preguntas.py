@@ -126,8 +126,7 @@ def pregunta_04():
         analyzer= "word",
         lowercase= True,
         stop_words="english",
-        token_pattern=r"[a-z]+",
-        #token_pattern=r"(?u)\b\w\w+\b",
+        token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
         binary=True,
         max_df=1.0,
         min_df=5,
@@ -164,9 +163,12 @@ def pregunta_04():
 
     # Búsque la mejor combinación de regresores
     gridSearchCV.fit(x_train, y_train)
+    #gridSearchCV.best_estimator_
+    a=gridSearchCV.score(x_train, y_train).round(4)
+    b=gridSearchCV.score(x_test, y_test).round(4)
 
     # Retorne el mejor modelo
-    return gridSearchCV
+    return a, b
 
 
 def pregunta_05():
@@ -187,12 +189,12 @@ def pregunta_05():
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
     cfm_train = confusion_matrix(
         y_true=y_train,
-        y_pred= gridSearchCV.predict_proba(X_train),
+        y_pred= gridSearchCV.predict(X_train),
     )
 
     cfm_test = confusion_matrix(
         y_true=y_test,
-        y_pred=gridSearchCV.predict_proba(X_test),
+        y_pred=gridSearchCV.predict(X_test),
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
@@ -213,7 +215,8 @@ def pregunta_06():
 
     # pronostique la polaridad del sentimiento para los datos
     # no etiquetados
-    y_untagged_pred = X_untagged.predict(y_untagged)
+    y_untagged_pred = gridSearchCV.predict(X_untagged)
+    c= pd.Series(y_untagged_pred).value_counts().to_dict()
 
     # Retorne el vector de predicciones
-    return y_untagged_pred
+    return c
