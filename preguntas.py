@@ -163,7 +163,9 @@ def pregunta_04():
 
     # Búsque la mejor combinación de regresores
     gridSearchCV.fit(x_train, y_train)
-    #gridSearchCV.best_estimator_
+    gridSearchCV.best_estimator_
+    #gridSearchCV.best_params_
+    
     a=gridSearchCV.score(x_train, y_train).round(4)
     b=gridSearchCV.score(x_test, y_test).round(4)
 
