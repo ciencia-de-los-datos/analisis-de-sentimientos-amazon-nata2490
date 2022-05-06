@@ -127,7 +127,7 @@ def pregunta_04():
         lowercase= True,
         stop_words="english",
         token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
-        binary=True,
+        binary=False,
         max_df=1.0,
         min_df=5,
     )
@@ -137,7 +137,7 @@ def pregunta_04():
     pipeline = Pipeline(
         steps=[
             ("cnt", countVectorizer),
-            ("Bernoulli", BernoulliNB()),
+            ("BernoulliNB", BernoulliNB()),
         ],
     )
 
@@ -145,7 +145,7 @@ def pregunta_04():
     # considerar 10 valores entre 0.1 y 1.0 para el parámetro alpha de
     # BernoulliNB.
     param_grid = {
-        "Bernoulli__alpha": np.arange(0.1, 1.0, 10),
+        "BernoulliNB__alpha": np.arange(0.1, 1.1, 10),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
@@ -158,10 +158,10 @@ def pregunta_04():
         #refit = True (valor de inicialización predeterminado), una vez que se encuentre el mejor modelo
         #(estimador) durante la validación cruzada, se volverá a entrenar en todo el conjunto de entrenamiento
         refit=True,
-        return_train_score=False,
+        return_train_score=True,
     )
     gridSearchCV.fit(x_train, y_train)
-    gridSearchCV.fit(x_test, y_test)
+    #gridSearchCV.fit(x_test, y_test)
 
     # Búsque la mejor combinación de regresores
     
@@ -172,7 +172,10 @@ def pregunta_04():
     #b=gridSearchCV.score(x_test, y_test).round(4)
     #print(gridSearchCV)
     #Retorne el mejor modelo
-    return gridSearchCV
+    #return gridSearchCV
+    print(gridSearchCV.score(x_train, y_train).round(4))
+    print(gridSearchCV.score(x_test, y_test).round(4))
+pregunta_04()
 
 
 
