@@ -123,7 +123,7 @@ def pregunta_04():
     # inferior de 5 palabras. Solo deben analizarse palabras conformadas por
     # letras.
     countVectorizer = CountVectorizer(
-        analyzer= "word",
+        analyzer= analyzer,
         lowercase= True,
         stop_words="english",
         token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
