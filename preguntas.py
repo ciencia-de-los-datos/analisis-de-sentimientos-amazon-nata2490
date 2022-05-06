@@ -160,22 +160,19 @@ def pregunta_04():
         refit=True,
         return_train_score=True,
     )
-    gridSearchCV.fit(x_train, y_train)
-    #gridSearchCV.fit(x_test, y_test)
-
-    # Búsque la mejor combinación de regresores
     
+    # Búsque la mejor combinación de regresores
+    gridSearchCV.fit(x_train, y_train)
     #gridSearchCV.best_estimator_
     #gridSearchCV.best_params_
     
     #a=gridSearchCV.score(x_train, y_train).round(4)
     #b=gridSearchCV.score(x_test, y_test).round(4)
-    #print(gridSearchCV)
+    
     #Retorne el mejor modelo
-    #return gridSearchCV
-    print(gridSearchCV.score(x_train, y_train).round(4))
-    print(gridSearchCV.score(x_test, y_test).round(4))
-pregunta_04()
+    return gridSearchCV
+    
+
 
 
 
@@ -224,7 +221,7 @@ def pregunta_06():
     # pronostique la polaridad del sentimiento para los datos
     # no etiquetados
     y_untagged_pred = gridSearchCV.predict(X_untagged)
-    c= pd.Series(y_untagged_pred).value_counts().to_dict()
+    #pd.Series(y_untagged_pred).value_counts().to_dict()
 
     # Retorne el vector de predicciones
-    return c
+    return y_untagged_pred
